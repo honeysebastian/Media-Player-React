@@ -21,13 +21,12 @@ function History() {
       <tbody>
         <tr>
           <td>1</td>
-          <td>Vashangalku Shesham</td>
+          <td>Varshangalku Shesham</td>
           <td><a href="https://www.youtube.com/embed/I5NMD5nd-NU?si=n-QTgJvXBfcM9Zlx" target='_blank'>https://www.youtube.com/embed/I5NMD5nd-NU?si=n-QTgJvXBfcM9Zlx</a></td>
           <td>25/04/2024 10:39AM</td>
           <td><button className='btn'><i className='fa-solid fa-trash text-danger'></i></button></td>
         </tr>
       </tbody>
-
     </table>
     </div>
   )
