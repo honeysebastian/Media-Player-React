@@ -3,6 +3,9 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { addVideoAPI } from '../Services/allAPI';
 
 function Add() {
     const [invalidYoutubeURL, setInvalidYoutubeURL] = useState(false)
@@ -26,19 +29,28 @@ function Add() {
             setInvalidYoutubeURL(true)
         }
     }
-    const handleUpload = () => {
+    const handleUpload = async () => {
         console.log("Inside handle upload function");
         const { caption, imageURL, youtubeURL } = videoDetails
-        if (caption && imageURL && youtubeURL){
+        if (caption && imageURL && youtubeURL) {
             console.log("Api Call");
+            try {
+                const result = await addVideoAPI(videoDetails)
+                console.log(result);
+                if (result.status >= 200 && result.status < 300) {
+                    console.log(result.data);
+                }
 
-        }else{
-            alert("Please fill the form completely!")
+            } catch (err) {
+                console.log(err);
+            }
+        } else {
+            toast.info("Please fill the form completely!")
         }
-
     }
 
 
+    
     return (
         <>
             <div className="d-flex align-items-center">
@@ -78,6 +90,7 @@ function Add() {
                     <Button onClick={handleUpload} variant="primary">Upload</Button>
                 </Modal.Footer>
             </Modal>
+            <ToastContainer position="top-center" autoClose={5000} theme="dark" />
 
         </>
     )
