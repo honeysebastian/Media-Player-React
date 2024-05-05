@@ -60,7 +60,7 @@ function Add({setAddVideoresponse}) {
         <>
             <div className="d-flex align-items-center">
                 <h5>Upload New Video</h5>
-                <button onClick={handleShow} className='btn btn-primary rounded-circle ms-3 fw-bolder'><i className="fa-solid fa-plus"></i></button>
+                <button onClick={handleShow} style={{ color: 'white', width: '60px', height: '60px',fontSize:'1.2rem' }} className='bg-primary rounded-circle ms-5'><i className="fa-solid fa-plus"></i></button>
             </div>
             <Modal
                 show={show}

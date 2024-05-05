@@ -4,12 +4,11 @@ import { getVideoHistoryAPI,removeHistoryAPI } from '../Services/allAPI'
 
 function History() {
   const [videoHistory, setVideoHistory] = useState([])
-  const [deleteHistory,setDeleteHistory]=useState('')
   console.log(videoHistory );
 
   useEffect(()=>{
     getAllHistory()
-  },[deleteHistory])
+  },[])
 
   const getAllHistory = async () => {
     try {
@@ -22,8 +21,8 @@ function History() {
 
   const handleRemoveHistory=async(videoId)=>{
     try{
-      const result=await removeHistoryAPI(videoId)
-      setDeleteHistory(result.data)
+      await removeHistoryAPI(videoId)
+      getAllHistory()
 
     }catch(err){
       console.log(err);
