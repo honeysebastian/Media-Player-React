@@ -1,15 +1,29 @@
 import React, { useState } from 'react'
 import Card from 'react-bootstrap/Card';
 import Modal from 'react-bootstrap/Modal';
-import { removeVideoAPI } from '../Services/allAPI';
+import { removeVideoAPI, saveHistoryAPI } from '../Services/allAPI';
 
-function VideoCard({displayData}) {
+function VideoCard({displayData,setDeleteResponse}) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = async () => {
+        setShow(true);
+        const {caption,youtubeURL}=displayData
+        const systemTime=new Date()
+        const formattedDate = systemTime.toLocaleString('en-US', { timeZoneName: 'short' });
+        console.log(formattedDate);
+        const videoHistory={caption,youtubeURL,timeStamp:formattedDate}
+        try{
+            await saveHistoryAPI(videoHistory)
+
+        }catch(err){
+            console.log(err);
+        }
+    }
     const handleRemoveVideo=async(videoId)=>{
         try{
             const result=await removeVideoAPI(videoId)
+            setDeleteResponse(result.data)
 
         }catch(err){
             console.log(err);
@@ -33,7 +47,7 @@ function VideoCard({displayData}) {
                     <Modal.Title>{displayData?.caption}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                <iframe width="100%" height="400" src={`${displayData?.youtubeURL}?autoplay=1`} title="caption" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                <iframe width="100%" height="400" src={`${displayData?.youtubeURL}?autoplay=1`} title="caption" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
 
                 </Modal.Body>
             </Modal>

@@ -15,3 +15,18 @@ export const getAllVideoAPI= async()=>{
 export const removeVideoAPI= async(videoId)=>{
    return await commonAPI('DELETE',`${SERVER_URL}/allVideos/${videoId}`,{})
 }
+
+// save history called by videoCard component
+export const saveHistoryAPI= async(video)=>{
+   return await commonAPI('POST',`${SERVER_URL}/history`,video)
+}
+
+// get video history calledby history component
+export const getVideoHistoryAPI= async(video)=>{
+   return await commonAPI('GET',`${SERVER_URL}/history`,'')
+}
+
+// video history removing api called by history component
+export const removeHistoryAPI= async(videoId)=>{
+   return await commonAPI('DELETE',`${SERVER_URL}/history/${videoId}`,{})
+}
