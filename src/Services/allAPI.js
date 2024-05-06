@@ -22,11 +22,26 @@ export const saveHistoryAPI= async(video)=>{
 }
 
 // get video history calledby history component
-export const getVideoHistoryAPI= async(video)=>{
+export const getVideoHistoryAPI= async()=>{
    return await commonAPI('GET',`${SERVER_URL}/history`,'')
 }
 
 // video history removing api called by history component
 export const removeHistoryAPI= async(videoId)=>{
    return await commonAPI('DELETE',`${SERVER_URL}/history/${videoId}`,{})
+}
+
+// add category called by category component
+export const addCategoryAPI= async(categoryDetails)=>{
+   return await commonAPI('POST',`${SERVER_URL}/allCategory`,categoryDetails)
+}
+
+// get all category called by category component
+export const getCategoryAPI= async()=>{
+   return await commonAPI('GET',`${SERVER_URL}/allCategory`,'')
+}
+
+// category removing api called by category component
+export const removeCategoryAPI= async(categoryId)=>{
+   return await commonAPI('DELETE',`${SERVER_URL}/allCategory/${categoryId}`,{})
 }
