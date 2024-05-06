@@ -5,6 +5,7 @@ import View from '../Components/View'
 import Category from '../Components/Category'
 
 function Home() {
+  const [removeCategoryVideoResponse,setRemoveCategoryVideoResponse]=useState('')
   const [addVideoResponse,setAddVideoresponse]=useState('')
   return (
     <>
@@ -15,11 +16,11 @@ function Home() {
     <div className="container-fluid my-5 row">
       <div className="col-lg-6">
         <h3>All Videos</h3>
-        <View addVideoResponse={addVideoResponse} />
+        <View addVideoResponse={addVideoResponse} removeCategoryVideoResponse={removeCategoryVideoResponse}  />
         
       </div>
       <div className="col-lg-6">
-        <Category/>
+        <Category setRemoveCategoryVideoResponse={setRemoveCategoryVideoResponse}/>
       </div>
     </div>
 

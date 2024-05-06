@@ -27,13 +27,17 @@ function VideoCard({displayData,setDeleteResponse}) {
 
         }catch(err){
             console.log(err);
-
         }
-
     }
+    const dragStarted=(e,videoId)=>{
+        console.log(`dragged video ID : ${videoId}`);
+        e.dataTransfer.setData("videoId",videoId)
+    }
+
+
     return (
         <>
-            <Card>
+            <Card draggable={true} onDragStart={e=>dragStarted(e,displayData?.id)}>
                 <Card.Img onClick={handleShow} height={'180px'} style={{ cursor: 'pointer' }} variant="top" src={displayData?.imageURL} />
                 <Card.Body>
                     <Card.Title className='d-flex justify-content-between align-items-center'>

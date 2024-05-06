@@ -4,14 +4,14 @@ import Col from 'react-bootstrap/Col';
 import VideoCard from './VideoCard';
 import { getAllVideoAPI } from '../Services/allAPI';
 
-function View(addVideoResponse) {
+function View({addVideoResponse,removeCategoryVideoResponse}) {
   const[deleteResponse,setDeleteResponse]=useState('')
   const[allVideos, setAllVideos] = useState([])
   console.log(allVideos);
 
   useEffect(() => {
     getAllVideos()
-  }, [addVideoResponse,deleteResponse])
+  }, [addVideoResponse,deleteResponse,removeCategoryVideoResponse])
 
   const getAllVideos = async () => {
     try {
