@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Modal from 'react-bootstrap/Modal';
 import { removeVideoAPI, saveHistoryAPI } from '../Services/allAPI';
 
-function VideoCard({displayData,setDeleteResponse}) {
+function VideoCard({displayData,setDeleteResponse,insideCategory}) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = async () => {
@@ -42,7 +42,7 @@ function VideoCard({displayData,setDeleteResponse}) {
                 <Card.Body>
                     <Card.Title className='d-flex justify-content-between align-items-center'>
                         <p>{displayData?.caption}</p>
-                        <button onClick={()=>handleRemoveVideo(displayData?.id)} className='btn'><i className='fa-solid fa-trash text-danger'></i></button>
+                       { !insideCategory && <button onClick={()=>handleRemoveVideo(displayData?.id)} className='btn'><i className='fa-solid fa-trash text-danger'></i></button>}
                     </Card.Title>
                 </Card.Body>
             </Card>

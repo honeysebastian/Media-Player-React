@@ -55,3 +55,8 @@ export const getAVideoAPI= async(videoId)=>{
 export const updateCategoryAPI= async(categoryId,categoryDetails)=>{
    return await commonAPI('PUT',`${SERVER_URL}/allCategory/${categoryId}`,categoryDetails)
 }
+
+//get a single category  called by view component
+export const getSingleCategoryAPI= async(categoryId)=>{
+   return await commonAPI('GET',`${SERVER_URL}/allCategory/${categoryId}`,'')
+}

@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { addCategoryAPI, getAVideoAPI, getCategoryAPI, removeCategoryAPI, removeVideoAPI, updateCategoryAPI } from '../Services/allAPI';
 import VideoCard from './VideoCard';
 
-function Category({ setRemoveCategoryVideoResponse }) {
+function Category({ setRemoveCategoryVideoResponse,deleteVideoCategoryResponse }) {
   const [categoryName, setCategoryName] = useState('')
   const [allCategory, setAllCategory] = useState([])
   const [show, setShow] = useState(false);
@@ -18,13 +18,14 @@ function Category({ setRemoveCategoryVideoResponse }) {
   useEffect(() => {
     getAllCategory()
 
-  }, [])
+  }, [deleteVideoCategoryResponse])
 
   const handleAddCategory = async () => {
     if (categoryName) {
       // api call
       try {
         await addCategoryAPI({ categoryName, allVideos: [] })
+        setCategoryName('')
         handleClose()
         getAllCategory()
       } catch (err) {
@@ -82,6 +83,15 @@ function Category({ setRemoveCategoryVideoResponse }) {
 
   }
 
+  const videoDragStarted=(e,videoDetails,categoryId)=>{
+    console.log(videoDetails,categoryId);
+    console.log("video dragged from category");
+    let dataShare={categoryId,videoDetails}
+    e.dataTransfer.setData("dataShare",JSON.stringify(dataShare))
+
+
+  }
+
 
 
   return (
@@ -103,8 +113,8 @@ function Category({ setRemoveCategoryVideoResponse }) {
                 {
                   item.allVideos?.length > 0 &&
                   item.allVideos?.map(video => (
-                    <div key={video?.id} className="col-lg-6 mb-3">
-                      <VideoCard displayData={video} />
+                    <div draggable={true} onDragStart={e=>videoDragStarted(e,video,item.id)} key={video?.id} className="col-lg-6 mb-3">
+                      <VideoCard displayData={video} insideCategory={true} />
 
                     </div>
                   ))
